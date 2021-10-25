@@ -15,12 +15,12 @@ const quizdata = [
         answer: "adverb clauses",
         category: 2
     },
-    // {
-    //     question: "Can you tell me the reason <u class = 'under'>why you are looking upset</u>?",
-    //     options: ["noun clause", "adverb clauses", "adjective clause"],
-    //     answer: "adjective clause",
-    //     category: 3
-    // },
+    {
+        question: "Can you tell me the reason <u class = 'under'>why you are looking upset</u>?",
+        options: ["noun clause", "adverb clauses", "adjective clause"],
+        answer: "adjective clause",
+        category: 3
+    },
     // {
     //     question: "This is the city <u class = 'under'>where I was born</u>.",
     //     options: ["noun clause", "adverb clauses", "adjective clause"],
@@ -147,24 +147,28 @@ function renderQuiz(questions, index) {
 
 /** Return correct answer of a question ***/
 function getCorrectAnswer(questions, index) {
-    var correctVideo = document.getElementById('video-correct');
-    var incorrectVideo = document.getElementById('video-incorrect');
     var value = document.querySelector("input[name=optRdBtn]:checked").value;
     // alert(value);
     var quest = questions[index].answer;
     if (value === quest) {
+        var correctVideo = document.getElementById('video-correct');
         if (correctVideo.style.display === "none") {
             correctVideo.style.display = "block";
-            incorrectVideo.style.display = "none";
+            setTimeout(function () {
+                $('#video-correct').fadeOut('fast');
+            }, 2500); // <-- time in milliseconds
         }
         else {
             correctVideo.style.display = "none"
         }
     }
     else {
+        var incorrectVideo = document.getElementById('video-incorrect');
         if (incorrectVideo.style.display === "none") {
             incorrectVideo.style.display = "block";
-            correctVideo.style.display = "none";
+            setTimeout(function () {
+                $('#video-incorrect').fadeOut('fast');
+            }, 2500); // <-- time in milliseconds
         }
         else {
             incorrectVideo.style.display = "none";
